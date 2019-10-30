@@ -3,31 +3,11 @@ import { Layout, Menu, Icon } from 'antd'
 import { RouteConfig } from '../../route'
 import { Link, withRouter } from 'react-router-dom'
 import AppMain from './AppMain'
+import { connect } from 'react-redux'
+import { setOpenkeys } from '../../store/action'
 import _ from 'lodash'
 const { Header, Sider, Content } = Layout
 const { SubMenu } = Menu
-let arr = []
-function findOpenKeys(menuList, pathName) {
-  const saveMenuList = _.cloneDeep(menuList)
-  let arr = []
-  const itera = (menuList, pathname) => {
-    for (let i in menuList) {
-      if (menuList[i].hasOwnProperty('children')) {
-        for (let k in menuList[i].children) {
-          if (menuList[i].children[k].path === pathname) {
-            arr.unshift(menuList[i].path)
-            // 关键迭代
-            itera(saveMenuList, menuList[i].path)
-          } else {
-            itera(menuList[i].children, pathname)
-          }
-        }
-      }
-    }
-  }
-  itera(menuList, pathName)
-  return arr
-}
 class Home extends Component {
   constructor(props) {
     super(props)
@@ -79,19 +59,25 @@ class Home extends Component {
       newOpenKeys = [],
       findKeys = RouteConfig => {
         RouteConfig.forEach(item => {
-          if (path.indexOf(item.path) === 0) {
-            newOpenKeys.push(item.path)
-          }
-          if (item.children) {
-            findKeys(item.children)
-          }
+          path.indexOf(item.path) === 0 && newOpenKeys.push(item.path)
+          item.children && findKeys(item.children)
         })
       }
     findKeys(RouteConfig)
-    return _.dropRight(newOpenKeys, 1)
+    return _.dropRight(newOpenKeys, 1) //去掉OpenKeys数组最后一项
+  }
+  handleSelect = ({ item, key, keyPath, selectedKeys, domEvent }) => {
+    const openKeys = item.props.openKeys
+    const { setOpenkeys } = this.props
+    setOpenkeys(openKeys)
+  }
+  handleOpenChange = openKeys => {
+    const { setOpenkeys } = this.props
+    setOpenkeys(openKeys)
   }
   render() {
     const { SelectedKeys } = this.state
+    const { openKeys } = this.props
     return (
       <Fragment>
         <Layout>
@@ -102,9 +88,11 @@ class Home extends Component {
             collapsed={this.state.collapsed}
           >
             <Menu
+              onSelect={this.handleSelect}
+              onOpenChange={this.handleOpenChange}
               theme="dark"
               mode="inline"
-              defaultOpenKeys={this.findDefaultOpenKeys(RouteConfig)}
+              defaultOpenKeys={openKeys}
               defaultSelectedKeys={SelectedKeys}
             >
               {this.renderMenuList(RouteConfig)}
@@ -139,4 +127,18 @@ class Home extends Component {
     )
   }
 }
-export default withRouter(Home)
+const mapStateToProps = state => {
+  return {
+    openKeys: state.Menu
+  }
+}
+const mapDispatchToProps = {
+  setOpenkeys
+}
+
+export default withRouter(
+  connect(
+    mapStateToProps,
+    mapDispatchToProps
+  )(Home)
+)
