@@ -1,23 +1,41 @@
-.layoutContainer{
-  .IconWrapper{
-    height: 75px;
+.layoutContainer {
+  .IconWrapper {
+    height: 64px;
+    padding-left: 24px;
+    overflow: hidden;
+    line-height: 64px;
+    background: #001529;
+    cursor: pointer;
+    transition: all .3s;
+    img {
+      display: inline-block;
+      height: 32px;
+      vertical-align: middle;
+    }
+    h1 {
+      display: inline-block;
+      margin: 0 0 0 12px;
+      color: #fff;
+      font-weight: 600;
+      font-size: 20px;
+      font-family: Avenir,Helvetica Neue,Arial,Helvetica,sans-serif;
+      vertical-align: middle
+   
+    }
+    h1:hover {
+      color: #1890ff;
+    }
+  }
+  .HeaderWrapper {
     display: flex;
-    padding-left: 10px;
-    box-sizing: border-box;
     align-items: center;
-     img{
-       width: 42px;
-     }
-     span{
-       margin-left: 4px;
-       font-size: 16px;
-       color:#fff;
-       overflow: hidden;/*超出部分隐藏*/
-       text-overflow:ellipsis;/* 超出部分显示省略号 */
-       white-space: nowrap;/*规定段落中的文本不进行换行 */
-     }
-     span:hover{
-       color:#1890ff;
-     }
+    .HeaderIcon {
+      font-size: 18px;
+      padding: 0 24px;
+      cursor: pointer;
+    }
+    .BreadMeap{
+
+    }
   }
 }

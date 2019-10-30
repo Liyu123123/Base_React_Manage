@@ -44,12 +44,12 @@ export const RouteConfig = [
       {
         name: '信息管理部分二',
         path: '/messageManage/test22',
-        redirect: '/messageManage/test222',
+        redirect: '/messageManage/test22/test222',
         icon: '',
         children: [
           {
             name: '信息二',
-            path: '/messageManage/test222',
+            path: '/messageManage/test22/test222',
             component: lazy(() => import('../views/messageManage/infopartTwo')),
             icon: ''
           }

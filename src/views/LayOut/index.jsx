@@ -1,5 +1,5 @@
 import React, { Component, Fragment } from 'react'
-import { Layout, Menu, Icon } from 'antd'
+import { Layout, Menu, Icon, Breadcrumb } from 'antd'
 import { RouteConfig } from '../../route'
 import { Link, withRouter } from 'react-router-dom'
 import AppMain from './AppMain'
@@ -7,6 +7,7 @@ import { connect } from 'react-redux'
 import { setOpenkeys } from '../../store/action'
 import _ from 'lodash'
 import Modulecss from './layout.module.scss'
+import MyBreadcrumb from './MyBreadcrumb'
 const { Header, Sider, Content } = Layout
 const { SubMenu } = Menu
 class Home extends Component {
@@ -15,18 +16,28 @@ class Home extends Component {
     const { pathname } = this.props.history.location
     this.state = {
       collapsed: false,
-      SelectedKeys: [pathname],
-      OpenKeys: []
+      ownDefaultSelectedKeys: [pathname],
     }
+    this.toggle = this.toggle.bind(this)
+    this.renderMenuList = this.renderMenuList.bind(this)
+    this.handleSelect = this.handleSelect.bind(this)
+    this.handleOpenChange = this.handleOpenChange.bind(this)
   }
-
-  toggle = () => {
+  static getDerivedStateFromProps(nextProps, prevState) {
+    const { pathname } = nextProps.history.location
+    if (pathname !== prevState.ownDefaultSelectedKeys[0]) {
+      return {
+        ownDefaultSelectedKeys: [pathname]
+      }
+    }
+    return null
+  }
+  toggle() {
     this.setState({
       collapsed: !this.state.collapsed
     })
   }
-
-  renderMenuList = RouteConfig => {
+  renderMenuList(RouteConfig) {
     return RouteConfig.reduce((pre, item) => {
       if (!item.children) {
         pre.push(
@@ -55,70 +66,60 @@ class Home extends Component {
       return pre
     }, [])
   }
-  findDefaultOpenKeys = RouteConfig => {
-    const path = this.props.location.pathname,
-      newOpenKeys = [],
-      findKeys = RouteConfig => {
-        RouteConfig.forEach(item => {
-          path.indexOf(item.path) === 0 && newOpenKeys.push(item.path)
-          item.children && findKeys(item.children)
-        })
-      }
-    findKeys(RouteConfig)
-    return _.dropRight(newOpenKeys, 1) //去掉OpenKeys数组最后一项
-  }
-  handleSelect = ({ item, key, keyPath, selectedKeys, domEvent }) => {
+  handleSelect({ item, key, keyPath, selectedKeys, domEvent }) {
     const openKeys = item.props.openKeys
     const { setOpenkeys } = this.props
     setOpenkeys(openKeys)
   }
-  handleOpenChange = openKeys => {
+  handleOpenChange(openKeys) {
     const { setOpenkeys } = this.props
     setOpenkeys(openKeys)
   }
   render() {
-    const { SelectedKeys } = this.state
+    const { ownDefaultSelectedKeys } = this.state
     const { openKeys } = this.props
     return (
       <Fragment>
         <Layout className={Modulecss.layoutContainer}>
           <Sider
-            style={{ height: '100vh' }}
+          width={256}
+            style={{ height: '100vh'}}
             trigger={null}
             collapsible
             collapsed={this.state.collapsed}
           >
-            {/* <img src="https://gw.alipayobjects.com/zos/rmsportal/KDpgvguMpGfqaHPjicRK.svg" /> */}
             <div className={Modulecss.IconWrapper}>
               <img
                 src="https://gw.alipayobjects.com/zos/rmsportal/KDpgvguMpGfqaHPjicRK.svg"
                 alt=""
               />
-              <span>React通用管理系统</span>
+              <h1>React通用管理系统</h1>
             </div>
             <Menu
+              // key={ownDefaultSelectedKeys}
               onSelect={this.handleSelect}
               onOpenChange={this.handleOpenChange}
               theme="dark"
               mode="inline"
+              selectedKeys={ownDefaultSelectedKeys}
               defaultOpenKeys={openKeys}
-              defaultSelectedKeys={SelectedKeys}
             >
               {this.renderMenuList(RouteConfig)}
             </Menu>
           </Sider>
           <Layout>
-            <Header style={{ background: '#fff', padding: 0 }}>
+            <Header
+              className={Modulecss.HeaderWrapper}
+              style={{ background: '#fff', padding: 0 }}
+            >
               <Icon
-                style={{
-                  fontSize: '18px',
-                  lineHeight: '64px',
-                  padding: '0 24px',
-                  cursor: 'pointer'
-                }}
+                className={Modulecss.HeaderIcon}
                 type={this.state.collapsed ? 'menu-unfold' : 'menu-fold'}
                 onClick={this.toggle}
               />
+              <div className={Modulecss.BreadMeap}>
+                <MyBreadcrumb />
+              </div>
             </Header>
             <Content
               style={{
