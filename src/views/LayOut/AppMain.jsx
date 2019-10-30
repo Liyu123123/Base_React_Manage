@@ -32,7 +32,7 @@ export default class AppMain extends Component {
         if (item.redirect) {
           arr.push(
             <Redirect
-            exact
+              exact
               from={item.path}
               to={item.redirect}
               key={item.path}
@@ -43,7 +43,6 @@ export default class AppMain extends Component {
       })
     }
     itera(newList)
-    console.log(arr)
     return arr
   }
   render() {

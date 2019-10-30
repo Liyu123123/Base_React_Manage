@@ -3,25 +3,39 @@ import { Layout, Menu, Icon } from 'antd'
 import { RouteConfig } from '../../route'
 import { Link, withRouter } from 'react-router-dom'
 import AppMain from './AppMain'
+import _ from 'lodash'
 const { Header, Sider, Content } = Layout
 const { SubMenu } = Menu
+let arr = []
 function findOpenKeys(menuList, pathName) {
-  return menuList
-    .filter(v => v.children)
-    .filter(v => {
-      return v.children.find(v => v.path === pathName)
-    })
-    .map(v => v.path)
+  const saveMenuList = _.cloneDeep(menuList)
+  let arr = []
+  const itera = (menuList, pathname) => {
+    for (let i in menuList) {
+      if (menuList[i].hasOwnProperty('children')) {
+        for (let k in menuList[i].children) {
+          if (menuList[i].children[k].path === pathname) {
+            arr.unshift(menuList[i].path)
+            // 关键迭代
+            itera(saveMenuList, menuList[i].path)
+          } else {
+            itera(menuList[i].children, pathname)
+          }
+        }
+      }
+    }
+  }
+  itera(menuList, pathName)
+  return arr
 }
 class Home extends Component {
   constructor(props) {
     super(props)
     const { pathname } = this.props.history.location
-    const OpenKeyS = findOpenKeys(RouteConfig, pathname)
     this.state = {
       collapsed: false,
       SelectedKeys: [pathname],
-      OpenKeys: OpenKeyS
+      OpenKeys: []
     }
   }
 
@@ -32,31 +46,52 @@ class Home extends Component {
   }
 
   renderMenuList = RouteConfig => {
-    return RouteConfig.map(item => {
-      return item.children ? (
-        <SubMenu
-          key={item.path}
-          title={
-            <span>
+    return RouteConfig.reduce((pre, item) => {
+      if (!item.children) {
+        pre.push(
+          <Menu.Item key={item.path}>
+            <Link to={item.path}>
               {item.icon ? <Icon type={item.icon} /> : null}
               <span>{item.name}</span>
-            </span>
+            </Link>
+          </Menu.Item>
+        )
+      } else {
+        pre.push(
+          <SubMenu
+            key={item.path}
+            title={
+              <span>
+                {item.icon ? <Icon type={item.icon} /> : null}
+                <span>{item.name}</span>
+              </span>
+            }
+          >
+            {this.renderMenuList(item.children)}
+          </SubMenu>
+        )
+      }
+      return pre
+    }, [])
+  }
+  findDefaultOpenKeys = RouteConfig => {
+    const path = this.props.location.pathname,
+      newOpenKeys = [],
+      findKeys = RouteConfig => {
+        RouteConfig.forEach(item => {
+          if (path.indexOf(item.path) === 0) {
+            newOpenKeys.push(item.path)
           }
-        >
-          {this.renderMenuList(item.children)}
-        </SubMenu>
-      ) : (
-        <Menu.Item key={item.path}>
-          <Link to={item.path}>
-            {item.icon ? <Icon type={item.icon} /> : null}
-            <span>{item.name}</span>
-          </Link>
-        </Menu.Item>
-      )
-    })
+          if (item.children) {
+            findKeys(item.children)
+          }
+        })
+      }
+    findKeys(RouteConfig)
+    return _.dropRight(newOpenKeys, 1)
   }
   render() {
-    const { SelectedKeys, OpenKeys } = this.state
+    const { SelectedKeys } = this.state
     return (
       <Fragment>
         <Layout>
@@ -69,7 +104,7 @@ class Home extends Component {
             <Menu
               theme="dark"
               mode="inline"
-              defaultOpenKeys={OpenKeys}
+              defaultOpenKeys={this.findDefaultOpenKeys(RouteConfig)}
               defaultSelectedKeys={SelectedKeys}
             >
               {this.renderMenuList(RouteConfig)}

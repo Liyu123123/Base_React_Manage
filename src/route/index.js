@@ -24,17 +24,17 @@ export const RouteConfig = [
     path: '/messageManage',
     role: '信息管理',
     icon: 'reconciliation',
-    redirect:'/messageManage/test11',
+    redirect: '/messageManage/test11',
     children: [
       {
         name: '信息管理部分一',
         path: '/messageManage/test11',
         icon: '',
-        redirect:'/messageManage/test111',
+        redirect: '/messageManage/test11/test111',
         children: [
           {
             name: '信息一',
-            path: '/messageManage/test111',
+            path: '/messageManage/test11/test111',
             component: lazy(() => import('../views/messageManage/infopartOne')),
             role: '设备管理-设备关联',
             icon: ''
@@ -44,7 +44,7 @@ export const RouteConfig = [
       {
         name: '信息管理部分二',
         path: '/messageManage/test22',
-        redirect:'/messageManage/test222',
+        redirect: '/messageManage/test222',
         icon: '',
         children: [
           {
@@ -62,13 +62,12 @@ export const RouteConfig = [
     path: '/deviceManage',
     role: '设备管理',
     icon: 'laptop',
-    redirect: '/deviceManage/associated1',
+    redirect: '/deviceManage/associated',
     children: [
       {
         name: '设备关联',
-        path: '/deviceManage/associatedall',
+        path: '/deviceManage/associated',
         component: lazy(() => import('../views/deviceManage/associated')),
-        redirect: '/deviceManage/associated1',
         role: '设备管理-设备关联',
         icon: ''
       },
