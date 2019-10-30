@@ -6,6 +6,7 @@ import AppMain from './AppMain'
 import { connect } from 'react-redux'
 import { setOpenkeys } from '../../store/action'
 import _ from 'lodash'
+import Modulecss from './layout.module.scss'
 const { Header, Sider, Content } = Layout
 const { SubMenu } = Menu
 class Home extends Component {
@@ -80,13 +81,21 @@ class Home extends Component {
     const { openKeys } = this.props
     return (
       <Fragment>
-        <Layout>
+        <Layout className={Modulecss.layoutContainer}>
           <Sider
             style={{ height: '100vh' }}
             trigger={null}
             collapsible
             collapsed={this.state.collapsed}
           >
+            {/* <img src="https://gw.alipayobjects.com/zos/rmsportal/KDpgvguMpGfqaHPjicRK.svg" /> */}
+            <div className={Modulecss.IconWrapper}>
+              <img
+                src="https://gw.alipayobjects.com/zos/rmsportal/KDpgvguMpGfqaHPjicRK.svg"
+                alt=""
+              />
+              <span>React通用管理系统</span>
+            </div>
             <Menu
               onSelect={this.handleSelect}
               onOpenChange={this.handleOpenChange}

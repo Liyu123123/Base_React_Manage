@@ -1,0 +1,23 @@
+.layoutContainer{
+  .IconWrapper{
+    height: 75px;
+    display: flex;
+    padding-left: 10px;
+    box-sizing: border-box;
+    align-items: center;
+     img{
+       width: 42px;
+     }
+     span{
+       margin-left: 4px;
+       font-size: 16px;
+       color:#fff;
+       overflow: hidden;/*超出部分隐藏*/
+       text-overflow:ellipsis;/* 超出部分显示省略号 */
+       white-space: nowrap;/*规定段落中的文本不进行换行 */
+     }
+     span:hover{
+       color:#1890ff;
+     }
+  }
+}
