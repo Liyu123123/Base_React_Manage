@@ -1,6 +1,6 @@
 import React, { Component, Suspense } from 'react'
 import { Route, Switch, Redirect } from 'react-router-dom'
-import { RouteConfig } from '../../route'
+import { RouteConfig } from '../../../../route'
 import { Spin } from 'antd'
 export default class AppMain extends Component {
   constructor() {
@@ -44,7 +44,6 @@ export default class AppMain extends Component {
     }
 
     itera(newList)
-    console.log(arr)
     return arr
   }
   render() {

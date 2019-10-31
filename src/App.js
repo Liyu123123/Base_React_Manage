@@ -6,7 +6,6 @@ import MyLayout from './views/LayOut/index'
 import store from './store/index'
 import { persistStore } from 'redux-persist'
 import { PersistGate } from 'redux-persist/es/integration/react'
-import '../src/assets/styles/index.scss'
 export default class App extends Component {
   render() {
     return (

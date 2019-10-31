@@ -1,7 +1,7 @@
 import React from 'react'
 import { Breadcrumb } from 'antd'
 import { withRouter, Link } from 'react-router-dom'
-import { RouteConfig } from '../../route'
+import { RouteConfig } from '../route'
 
 
 class MyBreadcrumb extends React.Component {
