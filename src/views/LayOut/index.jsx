@@ -1,5 +1,5 @@
 import React, { Component, Fragment } from 'react'
-import { Layout, Menu, Icon, Breadcrumb } from 'antd'
+import { Layout, Menu, Icon, Dropdown, Modal, message } from 'antd'
 import { RouteConfig } from '../../route'
 import { Link, withRouter } from 'react-router-dom'
 import AppMain from './AppMain'
@@ -8,6 +8,7 @@ import { setOpenkeys } from '../../store/action'
 import _ from 'lodash'
 import Modulecss from './layout.module.scss'
 import MyBreadcrumb from './MyBreadcrumb'
+import Mylogo from '../../assets/images/BiazfanxmamNRoxxVxka.png'
 const { Header, Sider, Content } = Layout
 const { SubMenu } = Menu
 class Home extends Component {
@@ -16,12 +17,13 @@ class Home extends Component {
     const { pathname } = this.props.history.location
     this.state = {
       collapsed: false,
-      ownDefaultSelectedKeys: [pathname],
+      ownDefaultSelectedKeys: [pathname]
     }
     this.toggle = this.toggle.bind(this)
     this.renderMenuList = this.renderMenuList.bind(this)
     this.handleSelect = this.handleSelect.bind(this)
     this.handleOpenChange = this.handleOpenChange.bind(this)
+    this.MenuIteClick = this.MenuIteClick.bind(this)
   }
   static getDerivedStateFromProps(nextProps, prevState) {
     const { pathname } = nextProps.history.location
@@ -75,6 +77,30 @@ class Home extends Component {
     const { setOpenkeys } = this.props
     setOpenkeys(openKeys)
   }
+  MenuIteClick({ key }) {
+    switch (key) {
+      case 'signout':
+        Modal.confirm({
+          title: '登出',
+          content: '确认登出?',
+          okText: '确认',
+          cancelText: '取消',
+          onOk: () => {
+            this.props.history.replace('/login')
+            const { setOpenkeys } = this.props
+            setOpenkeys([])
+            sessionStorage.clear()
+            localStorage.clear()
+          },
+          onCancel: () => {
+            message.info('取消登出')
+          }
+        })
+        break
+      default:
+        return
+    }
+  }
   render() {
     const { ownDefaultSelectedKeys } = this.state
     const { openKeys } = this.props
@@ -82,8 +108,8 @@ class Home extends Component {
       <Fragment>
         <Layout className={Modulecss.layoutContainer}>
           <Sider
-          width={256}
-            style={{ height: '100vh'}}
+            width={256}
+            style={{ height: '100vh' }}
             trigger={null}
             collapsible
             collapsed={this.state.collapsed}
@@ -119,6 +145,22 @@ class Home extends Component {
               />
               <div className={Modulecss.BreadMeap}>
                 <MyBreadcrumb />
+              </div>
+              <div className={Modulecss.ownInfo}>
+                <Dropdown
+                  overlay={
+                    <Menu onClick={this.MenuIteClick}>
+                      <Menu.Item key="1">个人中心</Menu.Item>
+                      <Menu.Item key="2">消息推送</Menu.Item>
+                      <Menu.Item key="signout">退出登录</Menu.Item>
+                    </Menu>
+                  }
+                >
+                  <div className={Modulecss.infoWrapper}>
+                    <img src={Mylogo} alt=""></img>
+                    <span>李_宇</span>
+                  </div>
+                </Dropdown>
               </div>
             </Header>
             <Content

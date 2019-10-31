@@ -6,7 +6,7 @@
     line-height: 64px;
     background: #001529;
     cursor: pointer;
-    transition: all .3s;
+    transition: all 0.3s;
     img {
       display: inline-block;
       height: 32px;
@@ -18,9 +18,8 @@
       color: #fff;
       font-weight: 600;
       font-size: 20px;
-      font-family: Avenir,Helvetica Neue,Arial,Helvetica,sans-serif;
-      vertical-align: middle
-   
+      font-family: Avenir, Helvetica Neue, Arial, Helvetica, sans-serif;
+      vertical-align: middle;
     }
     h1:hover {
       color: #1890ff;
@@ -30,12 +29,29 @@
     display: flex;
     align-items: center;
     .HeaderIcon {
+      flex: 0 0 auto;
       font-size: 18px;
       padding: 0 24px;
       cursor: pointer;
     }
-    .BreadMeap{
-
+    .BreadMeap {
+      flex: 1 0 auto;
+    }
+    .ownInfo {
+      flex: 0 0 auto;
+      margin-right: 30px;
+      .infoWrapper {
+        display: flex;
+        align-items: center;
+        img {
+          width: 24px;
+          height: 24px;
+        }
+        span {
+          padding-left: 8px;
+          font-size: 15px;
+        }
+      }
     }
   }
 }

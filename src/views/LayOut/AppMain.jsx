@@ -1,4 +1,4 @@
-import React, { Component, Suspense, Fragment } from 'react'
+import React, { Component, Suspense } from 'react'
 import { Route, Switch, Redirect } from 'react-router-dom'
 import { RouteConfig } from '../../route'
 import { Spin } from 'antd'
@@ -42,7 +42,9 @@ export default class AppMain extends Component {
         item.children && itera(item.children)
       })
     }
+
     itera(newList)
+    console.log(arr)
     return arr
   }
   render() {
@@ -51,15 +53,13 @@ export default class AppMain extends Component {
       return <Redirect to="/login" />
     } else {
       return (
-        <Fragment>
-          <Switch>
-            <Redirect from="/" exact to="/Dashboard" />
-            {this.rendereDirect(RouteConfig)}
-            <Suspense fallback={<Spin />}>
-              {this.renderRoute(RouteConfig)}
-            </Suspense>
-          </Switch>
-        </Fragment>
+        <Switch>
+          <Redirect from="/" exact to="/Dashboard" />
+          {this.rendereDirect(RouteConfig)}
+          <Suspense fallback={<Spin />}>
+            {this.renderRoute(RouteConfig)}
+          </Suspense>
+        </Switch>
       )
     }
   }
