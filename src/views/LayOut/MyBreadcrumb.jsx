@@ -1,8 +1,8 @@
+import React from 'react'
 import { Breadcrumb } from 'antd'
 import { withRouter, Link } from 'react-router-dom'
 import { RouteConfig } from '../../route'
-// import { RouteConfig } from '@/route'
-import React from 'react'
+
 
 class MyBreadcrumb extends React.Component {
   render() {
@@ -10,7 +10,7 @@ class MyBreadcrumb extends React.Component {
     const pathSnippets = location.pathname.split('/').filter(i => i)
     const extraBreadcrumbItems = pathSnippets.map((_, index) => {
       const path = `/${pathSnippets.slice(0, index + 1).join('/')}`
- 
+
       if (path === '/Dashboard') {
         return []
       }
@@ -47,7 +47,6 @@ class MyBreadcrumb extends React.Component {
       }
     }
     itera(RouteConfig)
-    console.log('111'+activeBreadName)
     return activeBreadName
   }
 }

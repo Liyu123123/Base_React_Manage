@@ -46,15 +46,21 @@ export default class AppMain extends Component {
     return arr
   }
   render() {
-    return (
-      <Fragment>
-        <Switch>
-          {this.rendereDirect(RouteConfig)}
-          <Suspense fallback={<Spin />}>
-            {this.renderRoute(RouteConfig)}
-          </Suspense>
-        </Switch>
-      </Fragment>
-    )
+    const isLogin = sessionStorage.getItem('isLogin')
+    if (!isLogin) {
+      return <Redirect to="/login" />
+    } else {
+      return (
+        <Fragment>
+          <Switch>
+            <Redirect from="/" exact to="/Dashboard" />
+            {this.rendereDirect(RouteConfig)}
+            <Suspense fallback={<Spin />}>
+              {this.renderRoute(RouteConfig)}
+            </Suspense>
+          </Switch>
+        </Fragment>
+      )
+    }
   }
 }

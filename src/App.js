@@ -11,13 +11,13 @@ export default class App extends Component {
   render() {
     return (
       <Provider store={store}>
-        <PersistGate persistor={persistStore(store)}  >
-        <BrowserRouter basename="/floorheat_web">
-          <Switch>
-            <Route path="/" component={MyLayout} />
-            <Route path="/login" component={Login} />
-          </Switch>
-        </BrowserRouter>
+        <PersistGate persistor={persistStore(store)}>
+          <BrowserRouter basename="/floorheat_web">
+            <Switch>
+              <Route path="/login" component={Login} />
+              <Route path="/" component={MyLayout} />
+            </Switch>
+          </BrowserRouter>
         </PersistGate>
       </Provider>
     )

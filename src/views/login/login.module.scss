@@ -1,5 +1,60 @@
-.loginWrapper{
+.loginWrapper {
   width: 100vw;
   height: 100vh;
-  background: red;
+  min-width:1200px;
+  display: flex;
+  flex-direction: column;
+  background: linear-gradient(
+    180deg,
+    rgba(22, 24, 33, 1) 0%,
+    rgba(20, 24, 58, 1) 100%
+  );
+  .header {
+    height: 84px;
+    background: rgba(255, 255, 255, 1);
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    .headerContent {
+      margin-left: 369px;
+      display: flex;
+      align-items: center;
+      .imgStyle {
+        padding-right: 21px;
+      }
+      .text {
+        font-size: 26px;
+        font-family: PingFangSC-Medium, PingFang SC;
+        color: rgba(183, 156, 126, 1);
+      }
+    }
+  }
+  .body {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    .backLogo {
+      margin-top: -55px;
+      width: 600px;
+      height: 600px;
+      background: url('../../assets/images/img.png') no-repeat 100% 100%;
+    }
+    .loginForm {
+      margin-top: -55px;
+      width: 412px;
+      height: 365px;
+      background: rgba(255, 255, 255, 1);
+      border-radius: 8px;
+      padding: 20px;
+      box-sizing: border-box;
+      .FormTxt {
+        text-align: center;
+        margin-bottom: 32px;
+        font-size: 24px;
+        font-weight: 500;
+        color: rgba(42, 46, 63, 1);
+      }
+    }
+  }
 }
