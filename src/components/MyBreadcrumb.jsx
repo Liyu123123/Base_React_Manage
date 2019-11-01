@@ -3,15 +3,16 @@ import { Breadcrumb } from 'antd'
 import { withRouter, Link } from 'react-router-dom'
 import { RouteConfig } from '../route'
 
-
 class MyBreadcrumb extends React.Component {
   render() {
     const { location } = this.props
     const pathSnippets = location.pathname.split('/').filter(i => i)
     const extraBreadcrumbItems = pathSnippets.map((_, index) => {
       const path = `/${pathSnippets.slice(0, index + 1).join('/')}`
-
-      if (path === '/Dashboard') {
+      if (
+        path === '/Base_React_Manage/Dashboard' ||
+        path === '/Base_React_Manage'
+      ) {
         return []
       }
       return (
@@ -20,12 +21,13 @@ class MyBreadcrumb extends React.Component {
         </Breadcrumb.Item>
       )
     })
+    console.log(extraBreadcrumbItems)
     return (
       <div style={{ display: 'inline-block' }}>
         <Breadcrumb>
           {[
-            <Breadcrumb.Item key="Dashboard">
-              <Link to="/Dashboard">首页</Link>
+            <Breadcrumb.Item key="/Base_React_Manage/Dashboard">
+              <Link to="/Base_React_Manage/Dashboard">首页</Link>
             </Breadcrumb.Item>
           ].concat(extraBreadcrumbItems)}
         </Breadcrumb>

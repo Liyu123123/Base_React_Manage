@@ -14,9 +14,10 @@ export default class App extends Component {
         <PersistGate persistor={persistStore(store)}>
           <BrowserRouter>
             <Switch>
-              <Redirect exact from="/" to="/Base_React_Manage"></Redirect>
+  
               <Route path="/login" component={Login} />
               <Route path="/Base_React_Manage" component={MyLayout} />
+              <Redirect exact from="/" to="/Base_React_Manage/Dashboard"></Redirect>
               <Route component={NotFound} />
             </Switch>
           </BrowserRouter>

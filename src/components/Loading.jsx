@@ -3,7 +3,14 @@ import { BounceLoader } from 'react-spinners'
 export default class Loading extends Component {
   render() {
     return (
-      <div style={{width:'100%',display:'flex',justifyContent:'center',alignItems:'center'}}>
+      <div
+        style={{
+          width: '100%',
+          display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'center'
+        }}
+      >
         <BounceLoader
           // css={override}
           sizeUnit={'px'}
@@ -14,4 +21,3 @@ export default class Loading extends Component {
     )
   }
 }
-

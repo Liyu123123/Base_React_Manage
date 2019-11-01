@@ -1,8 +1,9 @@
 import React, { Component, Suspense } from 'react'
+import { Spin } from 'antd'
 import { Route, Switch, Redirect } from 'react-router-dom'
 import { RouteConfig } from '../../../../route'
 import { connect } from 'react-redux'
-import Loading from '../../../../components/Loading'
+import MyLoading from '../../../../components/Loading.jsx'
 import NotFound from '../../../../components/NotFound'
 import _ from 'lodash'
 class AppMain extends Component {
@@ -68,13 +69,9 @@ class AppMain extends Component {
       return <Redirect to="/login" />
     } else {
       return (
-        <Suspense fallback={<Loading />}>
+        <Suspense fallback={<Spin delay={400} indicator={<MyLoading/>} />}>
           <Switch>
-            <Redirect
-              from="/Base_React_Manage"
-              to="/Base_React_Manage/Dashboard"
-              exact
-            ></Redirect>
+           
             {this.rendereDirect(RouteConfig)}
             {this.renderRoute(RouteConfig)}
             <Route component={NotFound} />
