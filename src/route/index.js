@@ -14,42 +14,45 @@ import { lazy } from 'react'
 export const RouteConfig = [
   {
     name: '首页',
-    path: '/Dashboard',
+    path: '/Base_React_Manage/Dashboard',
     component: lazy(() => import('../views/test/Dashboard')),
-    role: '首页权限',
+    role: '首页',
     icon: 'home'
   },
   {
-    name: '信息管理',
-    path: '/messageManage',
-    role: '信息管理',
+    name: '学校管理',
+    path: '/Base_React_Manage/messageManage',
+    role: '学校管理',
     icon: 'reconciliation',
-    redirect: '/messageManage/test11',
+    redirect: '/Base_React_Manage/messageManage/test11',
     children: [
       {
-        name: '信息管理部分一',
-        path: '/messageManage/test11',
+        name: '学生管理',
+        path: '/Base_React_Manage/messageManage/test11',
         icon: '',
-        redirect: '/messageManage/test11/test111',
+        role: '学校管理-学生管理',
+        redirect: '/Base_React_Manage/messageManage/test11/test111',
         children: [
           {
-            name: '信息一',
-            path: '/messageManage/test11/test111',
+            name: '班级管理',
+            path: '/Base_React_Manage/messageManage/test11/test111',
             component: lazy(() => import('../views/messageManage/infopartOne')),
-            role: '设备管理-设备关联',
+            role: '学校管理-学生管理-班级管理',
             icon: ''
           }
         ]
       },
       {
-        name: '信息管理部分二',
-        path: '/messageManage/test22',
-        redirect: '/messageManage/test22/test222',
+        name: '教师管理',
+        path: '/Base_React_Manage/messageManage/test22',
+        redirect: '/Base_React_Manage/messageManage/test22/test222',
         icon: '',
+        role: '学校管理-教师管理',
         children: [
           {
-            name: '信息二',
-            path: '/messageManage/test22/test222',
+            name: '授课管理',
+            role: '学校管理-教师管理-授课管理',
+            path: '/Base_React_Manage/messageManage/test22/test222',
             component: lazy(() => import('../views/messageManage/infopartTwo')),
             icon: ''
           }
@@ -59,21 +62,21 @@ export const RouteConfig = [
   },
   {
     name: '设备管理',
-    path: '/deviceManage',
+    path: '/Base_React_Manage/deviceManage',
     role: '设备管理',
     icon: 'laptop',
-    redirect: '/deviceManage/associated',
+    redirect: '/Base_React_Manage/deviceManage/associated',
     children: [
       {
         name: '设备关联',
-        path: '/deviceManage/associated',
+        path: '/Base_React_Manage/deviceManage/associated',
         component: lazy(() => import('../views/deviceManage/associated')),
         role: '设备管理-设备关联',
         icon: ''
       },
       {
         name: '设备信息',
-        path: '/deviceManage/infomation',
+        path: '/Base_React_Manage/deviceManage/infomation',
         component: lazy(() => import('../views/deviceManage/infomation')),
         role: '设备管理-设备信息',
         icon: ''
@@ -82,21 +85,21 @@ export const RouteConfig = [
   },
   {
     name: '能耗管理',
-    path: '/energyManagement',
+    path: '/Base_React_Manage/energyManagement',
     component: lazy(() => import('../views/energyManagement')),
     role: '能耗管理',
     icon: 'thunderbolt'
   },
   {
     name: '定时服务',
-    path: '/regularService',
+    path: '/Base_React_Manage/regularService',
     component: lazy(() => import('../views/regularService')),
     role: '定时服务',
     icon: 'clock-circle'
   },
   {
     name: '工程账号管理',
-    path: '/projectAccountManagement',
+    path: '/Base_React_Manage/projectAccountManagement',
     component: lazy(() => import('../views/projectAccountManagement')),
     role: '工程账号管理',
     icon: 'user'

@@ -1,12 +1,9 @@
 import user from '../store/modules/user'
 
-const env = process.env.NODE_ENV
+
 
 function hasPermission(value) {
-  if (env === 'development') {
-    // 开发环境完全放开权限
-    return true
-  }
+ 
   if (typeof value === 'string') {
     if (user.state.menuArr.includes(value)) {
       return true

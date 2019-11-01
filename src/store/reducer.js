@@ -8,7 +8,16 @@ const MenuReducer = (state = [], action) => {
       return state
   }
 }
+const authReducer = (state = [], action) => {
+  switch (action.type) {
+    case 'SET_AUTH':
+      return action.AuthList
+    default:
+      return state
+  }
+}
 const allReducers = combineReducers({
-  Menu: MenuReducer
+  Menu: MenuReducer,
+  auth: authReducer
 })
 export default allReducers
