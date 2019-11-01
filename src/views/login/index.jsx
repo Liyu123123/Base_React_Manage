@@ -2,6 +2,8 @@ import React, { Component, Fragment } from 'react'
 import { Form, Icon, Input, Button } from 'antd'
 import LoginCSS from './login.module.scss'
 import { withRouter } from 'react-router-dom'
+import { connect } from 'react-redux'
+import { setAuth } from '../../store/action'
 import loginLogo from '../../assets/images/logo.png'
 
 class HeatLogin extends Component {
@@ -36,11 +38,26 @@ class HeatLogin extends Component {
 }
 class NormalLoginForm extends React.Component {
   handleSubmit = e => {
+    const { setAuth } = this.props
     e.preventDefault()
     this.props.form.validateFields(async (err, values) => {
       if (!err) {
         this.props.history.replace('/')
-        sessionStorage.setItem('isLogin','1')
+        sessionStorage.setItem('isLogin', '1')
+        setAuth([
+          '首页',
+          '学校管理',
+          '学校管理-学生管理',
+          '学校管理-学生管理-班级管理',
+          '学校管理-教师管理',
+          '学校管理-教师管理-授课管理',
+          '设备管理',
+          '设备管理-设备关联',
+          '设备管理-设备信息',
+          '能耗管理',
+          '定时服务',
+          '工程账号管理'
+        ])
       }
     })
   }
@@ -87,8 +104,15 @@ class NormalLoginForm extends React.Component {
     )
   }
 }
-
+const mapDispatchToProps = {
+  setAuth
+}
 const WrappeNormalLoginForm = Form.create({ name: 'normal_login' })(
   NormalLoginForm
 )
-export default withRouter(HeatLogin)
+export default withRouter(
+  connect(
+    null,
+    mapDispatchToProps
+  )(HeatLogin)
+)

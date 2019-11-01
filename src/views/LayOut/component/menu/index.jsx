@@ -4,6 +4,7 @@ import { Link, withRouter } from 'react-router-dom'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { setOpenkeys } from '../../../../store/action'
+import _ from 'lodash'
 import Modulecss from './menu.module.scss'
 const { SubMenu } = Menu
 class MenuComponent extends Component {
@@ -27,30 +28,33 @@ class MenuComponent extends Component {
     return null
   }
   renderMenuList(RouteConfig) {
+    const { AuthList } = this.props
     return RouteConfig.reduce((pre, item) => {
-      if (!item.children) {
-        pre.push(
-          <Menu.Item key={item.path}>
-            <Link to={item.path}>
-              {item.icon ? <Icon type={item.icon} /> : null}
-              <span>{item.name}</span>
-            </Link>
-          </Menu.Item>
-        )
-      } else {
-        pre.push(
-          <SubMenu
-            key={item.path}
-            title={
-              <span>
+      if (AuthList.includes(item.role)) {
+        if (!_.isEmpty(item.children)) {
+          pre.push(
+            <SubMenu
+              key={item.path}
+              title={
+                <span>
+                  {item.icon ? <Icon type={item.icon} /> : null}
+                  <span>{item.name}</span>
+                </span>
+              }
+            >
+              {this.renderMenuList(item.children)}
+            </SubMenu>
+          )
+        } else {
+          pre.push(
+            <Menu.Item key={item.path}>
+              <Link to={item.path}>
                 {item.icon ? <Icon type={item.icon} /> : null}
                 <span>{item.name}</span>
-              </span>
-            }
-          >
-            {this.renderMenuList(item.children)}
-          </SubMenu>
-        )
+              </Link>
+            </Menu.Item>
+          )
+        }
       }
       return pre
     }, [])
@@ -98,7 +102,8 @@ MenuComponent.prototypes = {
 }
 const mapStateToProps = state => {
   return {
-    openKeys: state.Menu
+    openKeys: state.Menu,
+    AuthList: state.auth
   }
 }
 const mapDispatchToProps = {

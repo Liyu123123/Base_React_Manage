@@ -1,9 +1,10 @@
 import React, { Component } from 'react'
-import { BrowserRouter, Route, Switch } from 'react-router-dom'
+import { BrowserRouter, Route, Switch, Redirect } from 'react-router-dom'
 import { Provider } from 'react-redux'
 import Login from './views/login/index'
 import MyLayout from './views/LayOut/index'
 import store from './store/index'
+import NotFound from './components/NotFound'
 import { persistStore } from 'redux-persist'
 import { PersistGate } from 'redux-persist/es/integration/react'
 export default class App extends Component {
@@ -11,10 +12,12 @@ export default class App extends Component {
     return (
       <Provider store={store}>
         <PersistGate persistor={persistStore(store)}>
-          <BrowserRouter basename="/floorheat_web">
+          <BrowserRouter>
             <Switch>
+              <Redirect exact from="/" to="/Base_React_Manage"></Redirect>
               <Route path="/login" component={Login} />
-              <Route path="/" component={MyLayout} />
+              <Route path="/Base_React_Manage" component={MyLayout} />
+              <Route component={NotFound} />
             </Switch>
           </BrowserRouter>
         </PersistGate>

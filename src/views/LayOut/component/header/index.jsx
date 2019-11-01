@@ -28,6 +28,7 @@ class HeaderComponent extends Component {
           okText: '确认',
           cancelText: '取消',
           onOk: () => {
+            console.log( this.props)
             this.props.history.replace('/login')
             const { setOpenkeys } = this.props
             setOpenkeys([])
