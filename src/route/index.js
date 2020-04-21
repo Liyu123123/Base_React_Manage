@@ -103,5 +103,40 @@ export const RouteConfig = [
     component: lazy(() => import('../views/projectAccountManagement')),
     role: '工程账号管理',
     icon: 'user'
-  }
+  },
+  {
+    name: '系统管理',
+    path: '/Base_React_Manage/systemManage',
+    role: '设备管理',
+    icon: 'appstore',
+    children:[
+      {
+        name: '账号管理',
+        path: '/Base_React_Manage/systemManage/accountManage',
+        component: lazy(() => import('../views/systemManage/accountManage/accountManage.jsx')),
+        role: '设备管理-设备关联',
+        icon: 'team'
+      },
+      {
+        name: '角色管理',
+        path: '/Base_React_Manage/systemManage/roleManage',
+        component: lazy(() => import('../views/systemManage/roleManage/roleManage.jsx')),
+        role: '设备管理-设备关联',
+        icon: 'apartment'
+      },
+      {
+        name: '权限管理',
+        path: '/Base_React_Manage/systemManage/authorityManage',
+        component: lazy(() => import('../views/systemManage/authorityManage/authorityManage.jsx')),
+        role: '设备管理-设备关联',
+        icon: 'key'
+      },
+    ]
+  },
+  // {
+  //   name:'hooks demo',
+  //   path:"/Base_React_Manage/hooksdemo",
+  //   component: lazy(() => import('../views/hooks/countCalc')),
+  //   role: '工程账号管理',
+  // }
 ]
