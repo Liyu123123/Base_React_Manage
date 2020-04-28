@@ -1,5 +1,7 @@
 import React, { Fragment } from 'react'
-import { Form, Input, Button, Select } from 'antd'
+import { Form } from '@ant-design/compatible'
+import '@ant-design/compatible/assets/index.css'
+import { Input, Button, Select } from 'antd'
 
 const { Option } = Select
 
