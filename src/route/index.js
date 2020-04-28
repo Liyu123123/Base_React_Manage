@@ -18,121 +18,121 @@ export const RouteConfig = [
     component: lazy(() => import('../views/test/Dashboard')),
     role: '首页',
     icon: 'home'
-  },
-  {
-    name: '学校管理',
-    path: '/Base_React_Manage/messageManage',
-    role: '学校管理',
-    icon: 'reconciliation',
-    redirect: '/Base_React_Manage/messageManage/test11',
-    children: [
-      {
-        name: '学生管理',
-        path: '/Base_React_Manage/messageManage/test11',
-        icon: '',
-        role: '学校管理-学生管理',
-        redirect: '/Base_React_Manage/messageManage/test11/test111',
-        children: [
-          {
-            name: '班级管理',
-            path: '/Base_React_Manage/messageManage/test11/test111',
-            component: lazy(() => import('../views/messageManage/infopartOne')),
-            role: '学校管理-学生管理-班级管理',
-            icon: ''
-          }
-        ]
-      },
-      {
-        name: '教师管理',
-        path: '/Base_React_Manage/messageManage/test22',
-        redirect: '/Base_React_Manage/messageManage/test22/test222',
-        icon: '',
-        role: '学校管理-教师管理',
-        children: [
-          {
-            name: '授课管理',
-            role: '学校管理-教师管理-授课管理',
-            path: '/Base_React_Manage/messageManage/test22/test222',
-            component: lazy(() => import('../views/messageManage/infopartTwo')),
-            icon: ''
-          }
-        ]
-      }
-    ]
-  },
-  {
-    name: '设备管理',
-    path: '/Base_React_Manage/deviceManage',
-    role: '设备管理',
-    icon: 'laptop',
-    redirect: '/Base_React_Manage/deviceManage/associated',
-    children: [
-      {
-        name: '设备关联',
-        path: '/Base_React_Manage/deviceManage/associated',
-        component: lazy(() => import('../views/deviceManage/associated')),
-        role: '设备管理-设备关联',
-        icon: ''
-      },
-      {
-        name: '设备信息',
-        path: '/Base_React_Manage/deviceManage/infomation',
-        component: lazy(() => import('../views/deviceManage/infomation')),
-        role: '设备管理-设备信息',
-        icon: ''
-      }
-    ]
-  },
-  {
-    name: '能耗管理',
-    path: '/Base_React_Manage/energyManagement',
-    component: lazy(() => import('../views/energyManagement')),
-    role: '能耗管理',
-    icon: 'thunderbolt'
-  },
-  {
-    name: '定时服务',
-    path: '/Base_React_Manage/regularService',
-    component: lazy(() => import('../views/regularService')),
-    role: '定时服务',
-    icon: 'clock-circle'
-  },
-  {
-    name: '工程账号管理',
-    path: '/Base_React_Manage/projectAccountManagement',
-    component: lazy(() => import('../views/projectAccountManagement')),
-    role: '工程账号管理',
-    icon: 'user'
-  },
-  {
-    name: '系统管理',
-    path: '/Base_React_Manage/systemManage',
-    role: '设备管理',
-    icon: 'appstore',
-    children:[
-      {
-        name: '账号管理',
-        path: '/Base_React_Manage/systemManage/accountManage',
-        component: lazy(() => import('../views/systemManage/accountManage/accountManage.jsx')),
-        role: '设备管理-设备关联',
-        icon: 'team'
-      },
-      {
-        name: '角色管理',
-        path: '/Base_React_Manage/systemManage/roleManage',
-        component: lazy(() => import('../views/systemManage/roleManage/roleManage.jsx')),
-        role: '设备管理-设备关联',
-        icon: 'apartment'
-      },
-      {
-        name: '权限管理',
-        path: '/Base_React_Manage/systemManage/authorityManage',
-        component: lazy(() => import('../views/systemManage/authorityManage/authorityManage.jsx')),
-        role: '设备管理-设备关联',
-        icon: 'key'
-      },
-    ]
-  },
+  }
+  // {
+  //   name: '学校管理',
+  //   path: '/Base_React_Manage/messageManage',
+  //   role: '学校管理',
+  //   icon: 'reconciliation',
+  //   redirect: '/Base_React_Manage/messageManage/test11',
+  //   children: [
+  //     {
+  //       name: '学生管理',
+  //       path: '/Base_React_Manage/messageManage/test11',
+  //       icon: '',
+  //       role: '学校管理-学生管理',
+  //       redirect: '/Base_React_Manage/messageManage/test11/test111',
+  //       children: [
+  //         {
+  //           name: '班级管理',
+  //           path: '/Base_React_Manage/messageManage/test11/test111',
+  //           component: lazy(() => import('../views/messageManage/infopartOne')),
+  //           role: '学校管理-学生管理-班级管理',
+  //           icon: ''
+  //         }
+  //       ]
+  //     },
+  //     {
+  //       name: '教师管理',
+  //       path: '/Base_React_Manage/messageManage/test22',
+  //       redirect: '/Base_React_Manage/messageManage/test22/test222',
+  //       icon: '',
+  //       role: '学校管理-教师管理',
+  //       children: [
+  //         {
+  //           name: '授课管理',
+  //           role: '学校管理-教师管理-授课管理',
+  //           path: '/Base_React_Manage/messageManage/test22/test222',
+  //           component: lazy(() => import('../views/messageManage/infopartTwo')),
+  //           icon: ''
+  //         }
+  //       ]
+  //     }
+  //   ]
+  // },
+  // {
+  //   name: '设备管理',
+  //   path: '/Base_React_Manage/deviceManage',
+  //   role: '设备管理',
+  //   icon: 'laptop',
+  //   redirect: '/Base_React_Manage/deviceManage/associated',
+  //   children: [
+  //     {
+  //       name: '设备关联',
+  //       path: '/Base_React_Manage/deviceManage/associated',
+  //       component: lazy(() => import('../views/deviceManage/associated')),
+  //       role: '设备管理-设备关联',
+  //       icon: ''
+  //     },
+  //     {
+  //       name: '设备信息',
+  //       path: '/Base_React_Manage/deviceManage/infomation',
+  //       component: lazy(() => import('../views/deviceManage/infomation')),
+  //       role: '设备管理-设备信息',
+  //       icon: ''
+  //     }
+  //   ]
+  // },
+  // {
+  //   name: '能耗管理',
+  //   path: '/Base_React_Manage/energyManagement',
+  //   component: lazy(() => import('../views/energyManagement')),
+  //   role: '能耗管理',
+  //   icon: 'thunderbolt'
+  // },
+  // {
+  //   name: '定时服务',
+  //   path: '/Base_React_Manage/regularService',
+  //   component: lazy(() => import('../views/regularService')),
+  //   role: '定时服务',
+  //   icon: 'clock-circle'
+  // },
+  // {
+  //   name: '工程账号管理',
+  //   path: '/Base_React_Manage/projectAccountManagement',
+  //   component: lazy(() => import('../views/projectAccountManagement')),
+  //   role: '工程账号管理',
+  //   icon: 'user'
+  // },
+  // {
+  //   name: '系统管理',
+  //   path: '/Base_React_Manage/systemManage',
+  //   role: '设备管理',
+  //   icon: 'appstore',
+  //   children:[
+  //     {
+  //       name: '账号管理',
+  //       path: '/Base_React_Manage/systemManage/accountManage',
+  //       component: lazy(() => import('../views/systemManage/accountManage/accountManage.jsx')),
+  //       role: '设备管理-设备关联',
+  //       icon: 'team'
+  //     },
+  //     {
+  //       name: '角色管理',
+  //       path: '/Base_React_Manage/systemManage/roleManage',
+  //       component: lazy(() => import('../views/systemManage/roleManage/roleManage.jsx')),
+  //       role: '设备管理-设备关联',
+  //       icon: 'apartment'
+  //     },
+  //     {
+  //       name: '权限管理',
+  //       path: '/Base_React_Manage/systemManage/authorityManage',
+  //       component: lazy(() => import('../views/systemManage/authorityManage/authorityManage.jsx')),
+  //       role: '设备管理-设备关联',
+  //       icon: 'key'
+  //     },
+  //   ]
+  // },
   // {
   //   name:'hooks demo',
   //   path:"/Base_React_Manage/hooksdemo",

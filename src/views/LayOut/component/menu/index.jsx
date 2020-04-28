@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
-import { Menu, Icon } from 'antd'
+// import { Icon as LegacyIcon } from '@ant-design/compatible';
+import { Menu } from 'antd'
 import { Link, withRouter } from 'react-router-dom'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
@@ -37,7 +38,7 @@ class MenuComponent extends Component {
               key={item.path}
               title={
                 <span>
-                  {item.icon ? <Icon type={item.icon} /> : null}
+                  {/* {item.icon ? <LegacyIcon type={item.icon} /> : null} */}
                   <span>{item.name}</span>
                 </span>
               }
@@ -49,7 +50,7 @@ class MenuComponent extends Component {
           pre.push(
             <Menu.Item key={item.path}>
               <Link to={item.path}>
-                {item.icon ? <Icon type={item.icon} /> : null}
+                {/* {item.icon ? <LegacyIcon type={item.icon} /> : null} */}
                 <span>{item.name}</span>
               </Link>
             </Menu.Item>
@@ -100,7 +101,7 @@ class MenuComponent extends Component {
 MenuComponent.prototypes = {
   RouteConfig: PropTypes.array.isRequired
 }
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
   return {
     openKeys: state.Menu,
     AuthList: state.auth
@@ -110,8 +111,5 @@ const mapDispatchToProps = {
   setOpenkeys
 }
 export default withRouter(
-  connect(
-    mapStateToProps,
-    mapDispatchToProps
-  )(MenuComponent)
+  connect(mapStateToProps, mapDispatchToProps)(MenuComponent)
 )

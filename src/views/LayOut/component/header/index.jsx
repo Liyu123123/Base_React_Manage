@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
-import { Icon, Dropdown, Menu, Modal, message } from 'antd'
+// import { Icon as LegacyIcon } from '@ant-design/compatible';
+import { Dropdown, Menu, Modal, message } from 'antd'
 import PropTypes from 'prop-types'
 import MyBreadcrumb from '../../../../components/MyBreadcrumb'
 import { withRouter } from 'react-router-dom'
@@ -28,7 +29,7 @@ class HeaderComponent extends Component {
           okText: '确认',
           cancelText: '取消',
           onOk: () => {
-            console.log( this.props)
+            console.log(this.props)
             this.props.history.replace('/login')
             const { setOpenkeys } = this.props
             setOpenkeys([])
@@ -49,11 +50,11 @@ class HeaderComponent extends Component {
     return (
       <div className={ModuleCss.headerWrapper}>
         <div className={ModuleCss.trigger}>
-          <Icon
+          {/* <LegacyIcon
             className={ModuleCss.HeaderIcon}
             type={collapsed ? 'menu-unfold' : 'menu-fold'}
             onClick={() => this.ChangeCollpse(collapsed)}
-          />
+          /> */}
         </div>
         <div className={ModuleCss.BreadMeap}>
           <MyBreadcrumb />
@@ -86,9 +87,4 @@ HeaderComponent.prototypes = {
 const mapDispatchToProps = {
   setOpenkeys
 }
-export default withRouter(
-  connect(
-    null,
-    mapDispatchToProps
-  )(HeaderComponent)
-)
+export default withRouter(connect(null, mapDispatchToProps)(HeaderComponent))
