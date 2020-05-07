@@ -7,6 +7,7 @@ import store from './store/index'
 import NotFound from './components/NotFound'
 import { persistStore } from 'redux-persist'
 import { PersistGate } from 'redux-persist/es/integration/react'
+// useHistory，useLocation，useParams，useRouteMatch
 export default class App extends Component {
   render() {
     return (
@@ -14,10 +15,13 @@ export default class App extends Component {
         <PersistGate persistor={persistStore(store)}>
           <BrowserRouter>
             <Switch>
-  
               <Route path="/login" component={Login} />
               <Route path="/Base_React_Manage" component={MyLayout} />
-              <Redirect exact from="/" to="/Base_React_Manage/Dashboard"></Redirect>
+              <Redirect
+                exact
+                from="/"
+                to="/Base_React_Manage/Dashboard"
+              ></Redirect>
               <Route component={NotFound} />
             </Switch>
           </BrowserRouter>
